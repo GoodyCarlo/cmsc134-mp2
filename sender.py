@@ -22,7 +22,7 @@ def sign(sk, text):
     return signature
 
 
-def main():
+def main(message = "You can attack now!"):
     sign_private_key = RSA.importKey(
         open("keys/signing_sk.pem").read(),
         passphrase="password",
@@ -31,7 +31,7 @@ def main():
         open("keys/encryption_pk.pem").read(),
     )
 
-    message = b"You can attack now!"
+    message = message.encode('utf-8')
 
     ciphertext = encrypt(encrypt_public_key, message)
     signature = sign(sign_private_key, ciphertext)
