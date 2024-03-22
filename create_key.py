@@ -1,20 +1,22 @@
-#import libaries
+# import libaries
 
 from Crypto.Cipher import PKCS1_OAEP
 
 from Crypto.PublicKey import RSA
 
-#generate and export public and private key
+# generate and export public and private key
 mykey = RSA.generate(3072)
 
-pwd = b'password'
+pwd = b"password"
 
 with open("sk.pem", "wb") as f:
 
-    data = mykey.export_key(passphrase=pwd,
-                            pkcs=8,
-                            protection='PBKDF2WithHMAC-SHA512AndAES256-CBC',
-                            prot_params={'iteration_count':131072})
+    data = mykey.export_key(
+        passphrase=pwd,
+        pkcs=8,
+        protection="PBKDF2WithHMAC-SHA512AndAES256-CBC",
+        prot_params={"iteration_count": 131072},
+    )
 
     f.write(data)
 
@@ -28,3 +30,4 @@ with open("pk.pem", "wb") as f:
     f.write(data)
 
 f.close()
+
