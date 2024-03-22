@@ -23,8 +23,13 @@ def sign(sk, text):
 
 
 if __name__ == "__main__":
-    sign_private_key = RSA.importKey(open("sk.pem").read(), passphrase="password")
-    encrypt_public_key = RSA.importKey(open("pk.pem").read())
+    sign_private_key = RSA.importKey(
+        open("keys/signing_sk.pem").read(),
+        passphrase="password",
+    )
+    encrypt_public_key = RSA.importKey(
+        open("keys/encryption_pk.pem").read(),
+    )
 
     message = b"You can attack now!"
 
