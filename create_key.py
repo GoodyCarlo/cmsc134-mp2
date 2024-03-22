@@ -1,12 +1,10 @@
 from Crypto.PublicKey import RSA
 
 
-def generate_keypair():
+def generate_keypair(pwd=None):
     mykey = RSA.generate(
         3072
     )  # TODO: Consider using a 2048-bit key just cuz that's what everyone does
-
-    pwd = "password"
 
     public = mykey.public_key().export_key()
 
@@ -21,7 +19,7 @@ def generate_keypair():
 
 
 if __name__ == "__main__":
-    public_encryption, private_encryption = generate_keypair()
+    public_encryption, private_encryption = generate_keypair(pwd="password")
     with open("keys/encryption_pk.pem", "wb") as f:
         f.write(public_encryption)
 
