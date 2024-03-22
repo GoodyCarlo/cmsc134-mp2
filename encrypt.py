@@ -20,3 +20,18 @@ def sign(sk, text):
     signature = signer.sign(hashed_text)
 
     return signature
+
+
+if __name__ == "__main__":
+    sign_private_key = RSA.importKey(open("sk.pem").read(), passphrase="password")
+    encrypt_public_key = RSA.importKey(open("pk.pem").read())
+
+    message = b"You can attack now!"
+
+    ciphertext = encrypt(encrypt_public_key, message)
+    signature = sign(sign_private_key, ciphertext)
+
+    message = {"ciphertext": ciphertext.hex(), "signature": signature.hex()}
+
+    with open("msg.json", "w") as f:
+        f.write(json.dumps(message, indent=4))
