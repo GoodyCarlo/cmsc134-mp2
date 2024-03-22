@@ -21,9 +21,9 @@ def generate_keypair():
 
 
 if __name__ == "__main__":
-    public, private = generate_keypair()
-    with open("pk.pem", "wb") as f:
-        f.write(public)
+    public_encryption, private_encryption = generate_keypair()
+    with open("keys/encryption_pk.pem", "wb") as f:
+        f.write(public_encryption)
 
-    with open("sk.pem", "wb") as f:
-        f.write(private)
+    with open("keys/encryption_sk.pem", "wb") as f:
+        f.write(private_encryption)
