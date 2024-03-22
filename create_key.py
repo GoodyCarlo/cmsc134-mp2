@@ -18,7 +18,7 @@ def generate_keypair(pwd=None):
     return public, private
 
 
-if __name__ == "__main__":
+def main():
     public_encryption, private_encryption = generate_keypair(pwd="password")
     with open("keys/encryption_pk.pem", "wb") as f:
         f.write(public_encryption)
@@ -30,3 +30,7 @@ if __name__ == "__main__":
         f.write(public_signing)
     with open("keys/signing_sk.pem", "wb") as f:
         f.write(private_signing)
+
+
+if __name__ == "__main__":
+    main()

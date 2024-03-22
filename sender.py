@@ -22,7 +22,7 @@ def sign(sk, text):
     return signature
 
 
-if __name__ == "__main__":
+def main():
     sign_private_key = RSA.importKey(
         open("keys/signing_sk.pem").read(),
         passphrase="password",
@@ -40,3 +40,7 @@ if __name__ == "__main__":
 
     with open("msg.json", "w") as f:
         f.write(json.dumps(message, indent=4))
+
+
+if __name__ == "__main__":
+    main()

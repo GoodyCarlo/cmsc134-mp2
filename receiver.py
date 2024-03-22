@@ -18,7 +18,7 @@ def decrypt(sk, ciphertext):
     return text
 
 
-if __name__ == "__main__":
+def main():
     # import keys
     verify_public_key = RSA.importKey(
         open("keys/signing_pk.pem").read(),
@@ -45,3 +45,7 @@ if __name__ == "__main__":
         print(plaintext.decode())
     except ValueError:
         print("Invalid ciphertext")
+
+
+if __name__ == "__main__":
+    main()
