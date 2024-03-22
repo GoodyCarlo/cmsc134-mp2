@@ -14,6 +14,7 @@ def encrypt(pk, plaintext):
 
 
 def sign(sk, text):
+    # Hash is mandatory for this implementation of PKCS #1: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_v1_5.html
     hashed_text = SHA256.new(text)
     signer = pkcs1_15.new(sk)
     signature = signer.sign(hashed_text)
