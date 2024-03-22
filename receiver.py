@@ -20,8 +20,13 @@ def decrypt(sk, ciphertext):
 
 if __name__ == "__main__":
     # import keys
-    verify_public_key = RSA.importKey(open("pk.pem").read())
-    decrypt_private_key = RSA.importKey(open("sk.pem").read(), passphrase="password")
+    verify_public_key = RSA.importKey(
+        open("keys/signing_pk.pem").read(),
+    )
+    decrypt_private_key = RSA.importKey(
+        open("keys/encryption_sk.pem").read(),
+        passphrase="password",
+    )
 
     # read message and store from dictionary
     with open("msg.json", "r") as f:
