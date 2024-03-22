@@ -22,3 +22,12 @@ def generate_keypair():
     )
 
     return public, private
+
+
+if __name__ == "__main__":
+    public, private = generate_keypair()
+    with open("pk.pem", "wb") as f:
+        f.write(public)
+
+    with open("sk.pem", "wb") as f:
+        f.write(private)
