@@ -32,6 +32,12 @@ if __name__ == "__main__":
         ciphertext = bytes.fromhex(hex_message["ciphertext"])
         signature = bytes.fromhex(hex_message["signature"])
 
-    verify(verify_public_key, ciphertext, signature)
-    plaintext = decrypt(decrypt_private_key, ciphertext)
-    print(plaintext.decode())
+    try:
+        verify(verify_public_key, ciphertext, signature)
+    except ValueError:
+        print("Invalid signature")
+    try:
+        plaintext = decrypt(decrypt_private_key, ciphertext)
+        print(plaintext.decode())
+    except ValueError:
+        print("Invalid ciphertext")
