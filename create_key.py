@@ -1,3 +1,4 @@
+import pathlib
 from Crypto.PublicKey import RSA
 
 
@@ -18,7 +19,13 @@ def generate_keypair(pwd=None):
     return public, private
 
 
-def main(epkPATH, eskPATH, spkPATH, sskPATH, pwd):
+def main(
+        epkPATH=pathlib.WindowsPath('keys/encryption_pk.pem'),
+        eskPATH=pathlib.WindowsPath('keys/encryption_sk.pem'),
+        spkPATH=pathlib.WindowsPath('keys/signing_pk.pem'),
+        sskPATH=pathlib.WindowsPath('keys/signing_sk.pem'),
+        pwd="password"
+    ):
     public_encryption, private_encryption = generate_keypair(pwd=pwd)
     with open(epkPATH, "wb") as f:
         f.write(public_encryption)
