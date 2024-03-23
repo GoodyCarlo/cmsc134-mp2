@@ -23,7 +23,7 @@ RParserParent.add_argument("-esk", "--encryptionsk", default=pathlib.WindowsPath
 
 # For mainParser
 mainParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent, passParserParent, msgPathParserParent, keyParserParent])
-mainParser.add_argument("-m","--message", type=str, help="Enter a message to be encrypted/decrypted")
+mainParser.add_argument("-m","--message", default="You can attack now!", type=str, help="Enter a message to be encrypted/decrypted")
 
 # For create_key.py
 createParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent, passParserParent])
