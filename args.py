@@ -13,25 +13,17 @@ RParserParent.add_argument("-esk", "--encryptionsk", default=pathlib.WindowsPath
 
 
 # For create_key.py
-createParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent], add_help=False)
-createParser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
-cpArgs = createParser.parse_args()
+createParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent])
 
 # For sender.py
-senderParser = argparse.ArgumentParser(parents=[SParserParent], add_help=False)
-senderParser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
+senderParser = argparse.ArgumentParser(parents=[SParserParent])
 senderParser.add_argument("-c", "--createkey", action='store_true', help="Creates a new key")
 senderParser.add_argument("-m", "--message", type=str, help="Enter a message to be encrypted/decrypted")
-spArgs = senderParser.parse_args()
 
 # For receiver.py
-receiverParser = argparse.ArgumentParser(parents=[RParserParent], add_help=False)
-receiverParser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
+receiverParser = argparse.ArgumentParser(parents=[RParserParent])
 receiverParser.add_argument("-mpath", "--messagepath", default=pathlib.WindowsPath('msg.json') ,type=pathlib.Path, help="Path to msg.json")
-rpArgs = receiverParser.parse_args()
 
 # For mainParser
-mainParser = argparse.ArgumentParser(parents=[createParser], add_help=False)
-mainParser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
+mainParser = argparse.ArgumentParser(parents=[createParser])
 mainParser.add_argument("-c", "--createkey", action='store_true', help="Creates a new key")
-mpArgs = mainParser.parse_args()
