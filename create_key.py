@@ -18,19 +18,21 @@ def generate_keypair(pwd=None):
     return public, private
 
 
-def main():
-    public_encryption, private_encryption = generate_keypair(pwd="password")
-    with open("keys/encryption_pk.pem", "wb") as f:
+def main(epkPATH, eskPATH, spkPATH, sskPATH, pwd):
+    public_encryption, private_encryption = generate_keypair(pwd=pwd)
+    with open(epkPATH, "wb") as f:
         f.write(public_encryption)
-    with open("keys/encryption_sk.pem", "wb") as f:
+    with open(eskPATH, "wb") as f:
         f.write(private_encryption)
 
-    public_signing, private_signing = generate_keypair(pwd="password")
-    with open("keys/signing_pk.pem", "wb") as f:
+    public_signing, private_signing = generate_keypair(pwd=pwd)
+    with open(spkPATH, "wb") as f:
         f.write(public_signing)
-    with open("keys/signing_sk.pem", "wb") as f:
+    with open(sskPATH, "wb") as f:
         f.write(private_signing)
 
 
 if __name__ == "__main__":
-    main()
+    from args import createParser
+    args = createParser.parse_args()
+    main(args.encryptionpk, args.encryptionsk, args.signingpk, args.signingsk, args.pwd)
