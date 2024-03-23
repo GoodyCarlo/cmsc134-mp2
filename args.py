@@ -12,6 +12,10 @@ RParserParent.add_argument("-esk", "--encryptionsk", default=pathlib.WindowsPath
 
 
 
+# For mainParser
+mainParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent])
+mainParser.add_argument("-c", "--createkey", action='store_true', help="Creates a new key")
+
 # For create_key.py
 createParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent])
 
@@ -23,7 +27,3 @@ senderParser.add_argument("-m", "--message", type=str, help="Enter a message to 
 # For receiver.py
 receiverParser = argparse.ArgumentParser(parents=[RParserParent])
 receiverParser.add_argument("-mpath", "--messagepath", default=pathlib.WindowsPath('msg.json') ,type=pathlib.Path, help="Path to msg.json")
-
-# For mainParser
-mainParser = argparse.ArgumentParser(parents=[createParser])
-mainParser.add_argument("-c", "--createkey", action='store_true', help="Creates a new key")
