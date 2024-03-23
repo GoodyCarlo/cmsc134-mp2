@@ -1,15 +1,29 @@
-# Args parsing
-import argparse
-parser = argparse.ArgumentParser()
-parser.add_argument("message", type=str, help="Enter a message to be encrypted/decrypted")
-parser.add_argument("-c", "--createkey", action='store_true', help="Creates a new key")
-args = parser.parse_args()
-
-message = args.message
-
 # Main
+from args import mainParser
 import create_key, receiver, sender
+
+args = mainParser.parse_args()
+
 if args.createkey:
-    create_key.main()
-sender.main(message)
-receiver.main()
+    create_key.main(
+        args.encryptionpk,
+        args.encryptionsk,
+        args.signingpk,
+        args.signingsk,
+        args.pwd
+    )
+
+sender.main(
+    args.message,
+    args.signingsk,
+    args.encryptionpk,
+    args.messagepath,
+    args.pwd
+)
+
+receiver.main(
+    args.signingpk,
+    args.encryptionsk,
+    args.messagepath,
+    args.pwd
+)
