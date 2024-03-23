@@ -8,6 +8,9 @@ passParserParent.add_argument("-p", "--pwd", default="password", type=str, help=
 msgPathParserParent = argparse.ArgumentParser(add_help=False)
 msgPathParserParent.add_argument("-mpath", "--messagepath", default=pathlib.WindowsPath('msg.json') ,type=pathlib.Path, help="Path to msg.json")
 
+pTextParserParent = argparse.ArgumentParser(add_help=False)
+pTextParserParent.add_argument("message", type=str, help="Enter a message to be encrypted/decrypted")
+
 keyParserParent = argparse.ArgumentParser(add_help=False)
 keyParserParent.add_argument("-c", "--createkey", action='store_true', help="Creates a new key")
 
@@ -22,15 +25,13 @@ RParserParent.add_argument("-esk", "--encryptionsk", default=pathlib.WindowsPath
 
 
 # For mainParser
-mainParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent, passParserParent, msgPathParserParent, keyParserParent])
-mainParser.add_argument("-m","--message", default="You can attack now!", type=str, help="Enter a message to be encrypted/decrypted")
+mainParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent, passParserParent, msgPathParserParent, keyParserParent, pTextParserParent])
 
 # For create_key.py
 createParser = argparse.ArgumentParser(parents=[SParserParent, RParserParent, passParserParent])
 
 # For sender.py
-senderParser = argparse.ArgumentParser(parents=[SParserParent, passParserParent, msgPathParserParent, keyParserParent])
-senderParser.add_argument("message", type=str, help="Enter a message to be encrypted/decrypted")
+senderParser = argparse.ArgumentParser(parents=[SParserParent, passParserParent, msgPathParserParent, keyParserParent, pTextParserParent])
 
 # For receiver.py
 receiverParser = argparse.ArgumentParser(parents=[RParserParent, passParserParent, msgPathParserParent])
