@@ -1,3 +1,4 @@
+import pathlib
 from Crypto.PublicKey import RSA
 
 
@@ -18,15 +19,27 @@ def generate_keypair(pwd=None):
     return public, private
 
 
-if __name__ == "__main__":
-    public_encryption, private_encryption = generate_keypair(pwd="password")
-    with open("keys/encryption_pk.pem", "wb") as f:
+def main(
+        epkPATH=pathlib.WindowsPath('keys/encryption_pk.pem'),
+        eskPATH=pathlib.WindowsPath('keys/encryption_sk.pem'),
+        spkPATH=pathlib.WindowsPath('keys/signing_pk.pem'),
+        sskPATH=pathlib.WindowsPath('keys/signing_sk.pem'),
+        pwd="password"
+    ):
+    public_encryption, private_encryption = generate_keypair(pwd=pwd)
+    with open(epkPATH, "wb") as f:
         f.write(public_encryption)
-    with open("keys/encryption_sk.pem", "wb") as f:
+    with open(eskPATH, "wb") as f:
         f.write(private_encryption)
 
-    public_signing, private_signing = generate_keypair(pwd="password")
-    with open("keys/signing_pk.pem", "wb") as f:
+    public_signing, private_signing = generate_keypair(pwd=pwd)
+    with open(spkPATH, "wb") as f:
         f.write(public_signing)
-    with open("keys/signing_sk.pem", "wb") as f:
+    with open(sskPATH, "wb") as f:
         f.write(private_signing)
+
+
+if __name__ == "__main__":
+    from args import createParser
+    args = createParser.parse_args()
+    main(args.encryptionpk, args.encryptionsk, args.signingpk, args.signingsk, args.pwd)

@@ -1,4 +1,5 @@
 # import libaries
+import pathlib
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.PublicKey import RSA
 from Crypto.Signature import pkcs1_15
@@ -22,21 +23,46 @@ def sign(sk, text):
     return signature
 
 
-if __name__ == "__main__":
+def main(
+        message,
+        sskPATH=pathlib.WindowsPath('keys/signing_sk.pem'),
+        epkPATH=pathlib.WindowsPath('keys/encryption_pk.pem'),
+        messagePath=pathlib.WindowsPath('msg.json'),
+        pwd="password"
+    ):
+
     sign_private_key = RSA.importKey(
-        open("keys/signing_sk.pem").read(),
-        passphrase="password",
+        open(sskPATH).read(),
+        passphrase=pwd,
     )
     encrypt_public_key = RSA.importKey(
-        open("keys/encryption_pk.pem").read(),
+        open(epkPATH).read(),
     )
 
-    message = b"You can attack now!"
+    message = message.encode('utf-8')
 
     ciphertext = encrypt(encrypt_public_key, message)
     signature = sign(sign_private_key, ciphertext)
 
     message = {"ciphertext": ciphertext.hex(), "signature": signature.hex()}
 
-    with open("msg.json", "w") as f:
+    with open(messagePath, "w") as f:
         f.write(json.dumps(message, indent=4))
+
+
+if __name__ == "__main__":
+    from args import senderParser
+    import create_key
+
+    args = senderParser.parse_args()
+
+    if args.createkey:
+        create_key.main()
+
+    main(
+        args.message,
+        args.signingsk,
+        args.encryptionpk,
+        args.messagepath,
+        args.pwd
+    )
