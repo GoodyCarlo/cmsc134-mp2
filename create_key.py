@@ -20,12 +20,12 @@ def generate_keypair(pwd=None):
 
 
 def main(
-        epkPATH=pathlib.WindowsPath('keys/encryption_pk.pem'),
-        eskPATH=pathlib.WindowsPath('keys/encryption_sk.pem'),
-        spkPATH=pathlib.WindowsPath('keys/signing_pk.pem'),
-        sskPATH=pathlib.WindowsPath('keys/signing_sk.pem'),
-        pwd="password"
-    ):
+    epkPATH=pathlib.WindowsPath("keys/encryption_pk.pem"),
+    eskPATH=pathlib.WindowsPath("keys/encryption_sk.pem"),
+    spkPATH=pathlib.WindowsPath("keys/signing_pk.pem"),
+    sskPATH=pathlib.WindowsPath("keys/signing_sk.pem"),
+    pwd="password",
+):
     public_encryption, private_encryption = generate_keypair(pwd=pwd)
     with open(epkPATH, "wb") as f:
         f.write(public_encryption)
@@ -41,5 +41,12 @@ def main(
 
 if __name__ == "__main__":
     from args import createParser
+
     args = createParser.parse_args()
-    main(args.encryptionpk, args.encryptionsk, args.signingpk, args.signingsk, args.pwd)
+    main(
+        args.encryptionpk,
+        args.encryptionsk,
+        args.signingpk,
+        args.signingsk,
+        args.pwd,
+    )

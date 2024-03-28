@@ -24,12 +24,12 @@ def sign(sk, text):
 
 
 def main(
-        message,
-        sskPATH=pathlib.WindowsPath('keys/signing_sk.pem'),
-        epkPATH=pathlib.WindowsPath('keys/encryption_pk.pem'),
-        messagePath=pathlib.WindowsPath('msg.json'),
-        pwd="password"
-    ):
+    message,
+    sskPATH=pathlib.WindowsPath("keys/signing_sk.pem"),
+    epkPATH=pathlib.WindowsPath("keys/encryption_pk.pem"),
+    messagePath=pathlib.WindowsPath("msg.json"),
+    pwd="password",
+):
 
     sign_private_key = RSA.importKey(
         open(sskPATH).read(),
@@ -39,7 +39,7 @@ def main(
         open(epkPATH).read(),
     )
 
-    message = message.encode('utf-8')
+    message = message.encode("utf-8")
 
     ciphertext = encrypt(encrypt_public_key, message)
     signature = sign(sign_private_key, ciphertext)
@@ -59,10 +59,4 @@ if __name__ == "__main__":
     if args.createkey:
         create_key.main()
 
-    main(
-        args.message,
-        args.signingsk,
-        args.encryptionpk,
-        args.messagepath,
-        args.pwd
-    )
+    main(args.message, args.signingsk, args.encryptionpk, args.messagepath, args.pwd)

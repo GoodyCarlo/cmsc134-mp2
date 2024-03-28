@@ -1,6 +1,8 @@
 # Main
+import create_key
+import receiver
+import sender
 from args import mainParser
-import create_key, receiver, sender
 
 args = mainParser.parse_args()
 
@@ -10,7 +12,7 @@ if args.createkey:
         args.encryptionsk,
         args.signingpk,
         args.signingsk,
-        args.pwd
+        args.pwd,
     )
 
 sender.main(
@@ -18,12 +20,12 @@ sender.main(
     args.signingsk,
     args.encryptionpk,
     args.messagepath,
-    args.pwd
+    args.pwd,
 )
 
 receiver.main(
     args.signingpk,
     args.encryptionsk,
     args.messagepath,
-    args.pwd
+    args.pwd,
 )
