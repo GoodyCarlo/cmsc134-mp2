@@ -46,13 +46,13 @@ def main(
 
     try:
         verify(verify_public_key, ciphertext, signature)
+        try:
+            plaintext = decrypt(decrypt_private_key, ciphertext)
+            print(plaintext.decode())
+        except ValueError:
+            print("Invalid ciphertext")
     except ValueError:
         print("Invalid signature")
-    try:
-        plaintext = decrypt(decrypt_private_key, ciphertext)
-        print(plaintext.decode())
-    except ValueError:
-        print("Invalid ciphertext")
 
 
 if __name__ == "__main__":
