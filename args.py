@@ -72,7 +72,8 @@ mainParser = argparse.ArgumentParser(
         msgPathParserParent,
         keyParserParent,
         plaintextParserParent,
-    ]
+    ],
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 )
 
 # For create_key.py
@@ -81,7 +82,8 @@ createParser = argparse.ArgumentParser(
         senderParserParent,
         receiverParserParent,
         passwordParserParent,
-    ]
+    ],
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 )
 
 # For sender.py
@@ -92,7 +94,8 @@ senderParser = argparse.ArgumentParser(
         msgPathParserParent,
         keyParserParent,
         plaintextParserParent,
-    ]
+    ],
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 )
 
 # For receiver.py
@@ -101,5 +104,6 @@ receiverParser = argparse.ArgumentParser(
         receiverParserParent,
         passwordParserParent,
         msgPathParserParent,
-    ]
+    ],
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 )
