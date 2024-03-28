@@ -2,8 +2,8 @@
 import argparse
 import pathlib
 
-passParserParent = argparse.ArgumentParser(add_help=False)
-passParserParent.add_argument(
+passwordParserParent = argparse.ArgumentParser(add_help=False)
+passwordParserParent.add_argument(
     "-p",
     "--password",
     default="password",
@@ -20,8 +20,8 @@ msgPathParserParent.add_argument(
     help="Path to msg.json",
 )
 
-pTextParserParent = argparse.ArgumentParser(add_help=False)
-pTextParserParent.add_argument(
+plaintextParserParent = argparse.ArgumentParser(add_help=False)
+plaintextParserParent.add_argument(
     "message", type=str, help="Enter a message to be encrypted/decrypted"
 )
 
@@ -30,15 +30,15 @@ keyParserParent.add_argument(
     "-c", "--create-key", action="store_true", help="Creates a new key"
 )
 
-SParserParent = argparse.ArgumentParser(add_help=False)
-SParserParent.add_argument(
+senderParserParent = argparse.ArgumentParser(add_help=False)
+senderParserParent.add_argument(
     "-ssk",
     "--signing-sk",
     default=pathlib.WindowsPath("keys/signing_sk.pem"),
     type=pathlib.Path,
     help="Path to signing_sk.pem",
 )
-SParserParent.add_argument(
+senderParserParent.add_argument(
     "-epk",
     "--encryption-pk",
     default=pathlib.WindowsPath("keys/encryption_pk.pem"),
@@ -46,15 +46,15 @@ SParserParent.add_argument(
     help="Path to encryption_pk.pem",
 )
 
-RParserParent = argparse.ArgumentParser(add_help=False)
-RParserParent.add_argument(
+receiverParserParent = argparse.ArgumentParser(add_help=False)
+receiverParserParent.add_argument(
     "-spk",
     "--signing-pk",
     default=pathlib.WindowsPath("keys/signing_pk.pem"),
     type=pathlib.Path,
     help="Path to signing_pk.pem",
 )
-RParserParent.add_argument(
+receiverParserParent.add_argument(
     "-esk",
     "--encryption-sk",
     default=pathlib.WindowsPath("keys/encryption_sk.pem"),
@@ -66,32 +66,40 @@ RParserParent.add_argument(
 # For mainParser
 mainParser = argparse.ArgumentParser(
     parents=[
-        SParserParent,
-        RParserParent,
-        passParserParent,
+        senderParserParent,
+        receiverParserParent,
+        passwordParserParent,
         msgPathParserParent,
         keyParserParent,
-        pTextParserParent,
+        plaintextParserParent,
     ]
 )
 
 # For create_key.py
 createParser = argparse.ArgumentParser(
-    parents=[SParserParent, RParserParent, passParserParent]
+    parents=[
+        senderParserParent,
+        receiverParserParent,
+        passwordParserParent,
+    ]
 )
 
 # For sender.py
 senderParser = argparse.ArgumentParser(
     parents=[
-        SParserParent,
-        passParserParent,
+        senderParserParent,
+        passwordParserParent,
         msgPathParserParent,
         keyParserParent,
-        pTextParserParent,
+        plaintextParserParent,
     ]
 )
 
 # For receiver.py
 receiverParser = argparse.ArgumentParser(
-    parents=[RParserParent, passParserParent, msgPathParserParent]
+    parents=[
+        receiverParserParent,
+        passwordParserParent,
+        msgPathParserParent,
+    ]
 )
