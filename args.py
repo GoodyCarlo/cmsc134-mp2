@@ -92,7 +92,6 @@ senderParser = argparse.ArgumentParser(
         senderParserParent,
         passwordParserParent,
         msgPathParserParent,
-        keyParserParent,
         plaintextParserParent,
     ],
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,

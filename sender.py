@@ -51,12 +51,14 @@ def main(
 
 
 if __name__ == "__main__":
-    import create_key
     from args import senderParser
 
     args = senderParser.parse_args()
 
-    if args.create_key:
-        create_key.main()
-
-    main(args.message, args.signing_sk, args.encryption_pk, args.message_path, args.password)
+    main(
+        args.message,
+        args.signing_sk,
+        args.encryption_pk,
+        args.message_path,
+        args.password,
+    )
