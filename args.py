@@ -36,14 +36,14 @@ senderParserParent.add_argument(
     "--signing-sk",
     default=Path("keys/signing_sk.pem"),
     type=Path,
-    help="Path to signing_sk.pem",
+    help="Path to signature's private/signing key",
 )
 senderParserParent.add_argument(
     "-epk",
     "--encryption-pk",
     default=Path("keys/encryption_pk.pem"),
     type=Path,
-    help="Path to encryption_pk.pem",
+    help="Path to message's public/encryption key",
 )
 
 receiverParserParent = argparse.ArgumentParser(add_help=False)
@@ -52,14 +52,14 @@ receiverParserParent.add_argument(
     "--signing-pk",
     default=Path("keys/signing_pk.pem"),
     type=Path,
-    help="Path to signing_pk.pem",
+    help="Path to signature's public/validation key",
 )
 receiverParserParent.add_argument(
     "-esk",
     "--encryption-sk",
     default=Path("keys/encryption_sk.pem"),
     type=Path,
-    help="Path to encryption_sk.pem",
+    help="Path to message's private/decryption key",
 )
 
 
