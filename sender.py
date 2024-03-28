@@ -1,11 +1,11 @@
 # import libaries
-import pathlib
+import json
+from pathlib import Path
+
 from Crypto.Cipher import PKCS1_OAEP
+from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Signature import pkcs1_15
-from Crypto.Hash import SHA256
-
-import json
 
 
 def encrypt(pk, plaintext):
@@ -24,12 +24,12 @@ def sign(sk, text):
 
 
 def main(
-        message,
-        sskPATH=pathlib.WindowsPath('keys/signing_sk.pem'),
-        epkPATH=pathlib.WindowsPath('keys/encryption_pk.pem'),
-        messagePath=pathlib.WindowsPath('msg.json'),
-        pwd="password"
-    ):
+    message,
+    sskPATH=Path("keys/signing_sk.pem"),
+    epkPATH=Path("keys/encryption_pk.pem"),
+    messagePath=Path("msg.json"),
+    pwd="password",
+):
 
     sign_private_key = RSA.importKey(
         open(sskPATH).read(),
@@ -39,7 +39,7 @@ def main(
         open(epkPATH).read(),
     )
 
-    message = message.encode('utf-8')
+    message = message.encode("utf-8")
 
     ciphertext = encrypt(encrypt_public_key, message)
     signature = sign(sign_private_key, ciphertext)
@@ -52,17 +52,13 @@ def main(
 
 if __name__ == "__main__":
     from args import senderParser
-    import create_key
 
     args = senderParser.parse_args()
 
-    if args.createkey:
-        create_key.main()
-
     main(
         args.message,
-        args.signingsk,
-        args.encryptionpk,
-        args.messagepath,
-        args.pwd
+        args.signing_sk,
+        args.encryption_pk,
+        args.message_path,
+        args.password,
     )

@@ -1,9 +1,10 @@
-import pathlib
+import json
+from pathlib import Path
+
 from Crypto.Cipher import PKCS1_OAEP
+from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 from Crypto.Signature import pkcs1_15
-from Crypto.Hash import SHA256
-import json
 
 
 def verify(pk, text, signature):
@@ -20,11 +21,11 @@ def decrypt(sk, ciphertext):
 
 
 def main(
-        spkPATH=pathlib.WindowsPath('keys/signing_pk.pem'),
-        eskPATH=pathlib.WindowsPath('keys/encryption_sk.pem'),
-        messagePath=pathlib.WindowsPath('msg.json'),
-        pwd="password"
-    ):
+    spkPATH=Path("keys/signing_pk.pem"),
+    eskPATH=Path("keys/encryption_sk.pem"),
+    messagePath=Path("msg.json"),
+    pwd="password",
+):
 
     # import keys
     verify_public_key = RSA.importKey(
@@ -59,9 +60,5 @@ if __name__ == "__main__":
 
     args = receiverParser.parse_args()
 
-    main(
-        args.signingpk,
-        args.encryptionsk,
-        args.messagepath,
-        args.pwd
-    )
+    main(args.signing_pk, args.encryption_sk, args.message_path, args.password)
+
