@@ -1,6 +1,6 @@
 # Args parsing
 import argparse
-import pathlib
+from pathlib import Path
 
 passwordParserParent = argparse.ArgumentParser(add_help=False)
 passwordParserParent.add_argument(
@@ -15,8 +15,8 @@ msgPathParserParent = argparse.ArgumentParser(add_help=False)
 msgPathParserParent.add_argument(
     "-mpath",
     "--message-path",
-    default=pathlib.WindowsPath("msg.json"),
-    type=pathlib.Path,
+    default=Path("msg.json"),
+    type=Path,
     help="Path to msg.json",
 )
 
@@ -34,15 +34,15 @@ senderParserParent = argparse.ArgumentParser(add_help=False)
 senderParserParent.add_argument(
     "-ssk",
     "--signing-sk",
-    default=pathlib.WindowsPath("keys/signing_sk.pem"),
-    type=pathlib.Path,
+    default=Path("keys/signing_sk.pem"),
+    type=Path,
     help="Path to signing_sk.pem",
 )
 senderParserParent.add_argument(
     "-epk",
     "--encryption-pk",
-    default=pathlib.WindowsPath("keys/encryption_pk.pem"),
-    type=pathlib.Path,
+    default=Path("keys/encryption_pk.pem"),
+    type=Path,
     help="Path to encryption_pk.pem",
 )
 
@@ -50,15 +50,15 @@ receiverParserParent = argparse.ArgumentParser(add_help=False)
 receiverParserParent.add_argument(
     "-spk",
     "--signing-pk",
-    default=pathlib.WindowsPath("keys/signing_pk.pem"),
-    type=pathlib.Path,
+    default=Path("keys/signing_pk.pem"),
+    type=Path,
     help="Path to signing_pk.pem",
 )
 receiverParserParent.add_argument(
     "-esk",
     "--encryption-sk",
-    default=pathlib.WindowsPath("keys/encryption_sk.pem"),
-    type=pathlib.Path,
+    default=Path("keys/encryption_sk.pem"),
+    type=Path,
     help="Path to encryption_sk.pem",
 )
 
