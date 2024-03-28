@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
     args = senderParser.parse_args()
 
-    if args.createkey:
+    if args.create_key:
         create_key.main()
 
-    main(args.message, args.signingsk, args.encryptionpk, args.messagepath, args.pwd)
+    main(args.message, args.signing_sk, args.encryption_pk, args.message_path, args.password)

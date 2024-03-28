@@ -59,5 +59,5 @@ if __name__ == "__main__":
 
     args = receiverParser.parse_args()
 
-    main(args.signingpk, args.encryptionsk, args.messagepath, args.pwd)
+    main(args.signing_pk, args.encryption_sk, args.message_path, args.password)
 

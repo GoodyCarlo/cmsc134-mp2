@@ -6,26 +6,26 @@ from args import mainParser
 
 args = mainParser.parse_args()
 
-if args.createkey:
+if args.create_key:
     create_key.main(
-        args.encryptionpk,
-        args.encryptionsk,
-        args.signingpk,
-        args.signingsk,
-        args.pwd,
+        args.encryption_pk,
+        args.encryption_sk,
+        args.signing_pk,
+        args.signing_sk,
+        args.password,
     )
 
 sender.main(
     args.message,
-    args.signingsk,
-    args.encryptionpk,
-    args.messagepath,
-    args.pwd,
+    args.signing_sk,
+    args.encryption_pk,
+    args.message_path,
+    args.password,
 )
 
 receiver.main(
-    args.signingpk,
-    args.encryptionsk,
-    args.messagepath,
-    args.pwd,
+    args.signing_pk,
+    args.encryption_sk,
+    args.message_path,
+    args.password,
 )

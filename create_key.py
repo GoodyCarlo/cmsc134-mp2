@@ -44,9 +44,9 @@ if __name__ == "__main__":
 
     args = createParser.parse_args()
     main(
-        args.encryptionpk,
-        args.encryptionsk,
-        args.signingpk,
-        args.signingsk,
-        args.pwd,
+        args.encryption_pk,
+        args.encryption_sk,
+        args.signing_pk,
+        args.signing_sk,
+        args.password,
     )
