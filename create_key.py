@@ -13,7 +13,7 @@ def generate_keypair(pwd=None):
         passphrase=pwd,
         pkcs=8,
         protection="PBKDF2WithHMAC-SHA512AndAES256-CBC",
-        prot_params={"iteration_count": 131072},
+        prot_params={"iteration_count": 210000},
     )
 
     return public, private
