@@ -4,13 +4,13 @@ from pathlib import Path
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
-from Crypto.Signature import pkcs1_15
+from Crypto.Signature import pss
 
 
 def verify(pk, text, signature):
-    # Hash is mandatory for this implementation of PKCS #1: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_v1_5.html
+    # Hash is mandatory for this implementation of PSS: https://pycryptodome.readthedocs.io/en/latest/src/signature/pkcs1_pss.html
     hashed_text = SHA256.new(text)
-    verifier = pkcs1_15.new(pk)
+    verifier = pss.new(pk)
     verifier.verify(hashed_text, signature)
 
 
@@ -61,4 +61,3 @@ if __name__ == "__main__":
     args = receiverParser.parse_args()
 
     main(args.signing_pk, args.encryption_sk, args.message_path, args.password)
-
