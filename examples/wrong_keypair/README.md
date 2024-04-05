@@ -2,7 +2,7 @@
 
 ### To create the false keypairs:
 
-```python
+```bash
 python create_key.py \
 -ssk examples/wrong_keypair/keys/signing_sk.pem \
 -epk examples/wrong_keypair/keys/encryption_pk.pem \
@@ -12,13 +12,13 @@ python create_key.py \
 
 ### To create the message:
 
-```
+```bash
 python sender.py "I like CMSC134!" -mpath examples/wrong_keypair/msg.json
 ```
 
 ### To read the message with the wrong keypair
 
-```python
+```bash
 python receiver.py \
 -mpath examples/wrong_keypair/msg.json \
 -spk examples/wrong_keypair/keys/signing_pk.pem \
@@ -29,9 +29,8 @@ Expected output is: `Invalid signature`
 
 ### To read the message with the right keypair:
 
-```python
+```bash
 python receiver.py -mpath examples/wrong_keypair/msg.json
 ```
 
 Expected output is: `I like CMSC134!`
-
