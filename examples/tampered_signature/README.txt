@@ -1,3 +1,5 @@
+This test changes the first character of the message's ciphertext.
+
 To check the original message:
 
 python receiver.py -mpath examples/tampered_signature/msg_original.json
@@ -10,5 +12,3 @@ To check the tampered message:
 python receiver.py -mpath examples/tampered_signature/msg_tampered_signature.json
 
 Expected output is: "Invalid signature"
-
-
