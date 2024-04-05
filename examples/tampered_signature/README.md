@@ -6,7 +6,7 @@
 python receiver.py -mpath examples/tampered_signature/msg_original.json
 ```
 
-Expected output is: "The signature of this message has been tampered with"
+Expected output is: `The signature of this message has been tampered with`
 
 ### To check the tampered message:
 
@@ -14,4 +14,4 @@ Expected output is: "The signature of this message has been tampered with"
 python receiver.py -mpath examples/tampered_signature/msg_tampered_signature.json
 ```
 
-Expected output is: "Invalid signature"
+Expected output is: `Invalid signature`
